@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Blog de Electricidad y Magnetismo{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'posts/css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Blog de Electricidad y Magnetismo</h1>
+        <nav>
+            <a href="{% url 'inicio' %}">Inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Alejandro Deutz · Contenido basado en el curso de Gerardo Pozzi</p>
+    </footer>
+</body>
+</html>
