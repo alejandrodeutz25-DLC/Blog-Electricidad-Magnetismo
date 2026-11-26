@@ -1,0 +1,18 @@
+{% extends "posts/base.html" %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+    <h2>Posts</h2>
+
+    {% for post in posts %}
+        <article>
+            <h3>{{ post.titulo }}</h3>
+            <p><small>{{ post.fecha_creacion|date:"d/m/Y H:i" }}</small></p>
+            <p>{{ post.contenido|truncatewords:40 }}</p>
+        </article>
+        <hr>
+    {% empty %}
+        <p>Todavía no hay posts publicados.</p>
+    {% endfor %}
+{% endblock %}
