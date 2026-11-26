@@ -7,6 +7,7 @@ Blog web desarrollado con Django que publica apuntes sobre Electricidad y Magnet
 - Python 3
 - Django 6
 - SQLite
+- Pillow (imágenes)
 - HTML y CSS
 
 ## Funcionalidades
