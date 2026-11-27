@@ -10,6 +10,7 @@ class Post(models.Model):
 
     titulo = models.CharField(max_length=200)
     contenido = models.TextField()
+    imagen = models.ImageField(upload_to="posts/", blank=True, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(max_length=20, choices=ESTADOS, default="borrador")
 

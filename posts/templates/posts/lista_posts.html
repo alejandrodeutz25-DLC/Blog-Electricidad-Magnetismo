@@ -4,10 +4,11 @@
 
 {% block content %}
     <h2>Posts</h2>
+    <p><a href="{% url 'crear_post' %}">+ Nuevo post</a></p>
 
     {% for post in posts %}
         <article>
-            <h3>{{ post.titulo }}</h3>
+            <h3><a href="{% url 'detalle_post' post.pk %}">{{ post.titulo }}</a></h3>
             <p><small>{{ post.fecha_creacion|date:"d/m/Y H:i" }}</small></p>
             <p>{{ post.contenido|truncatewords:40 }}</p>
         </article>
