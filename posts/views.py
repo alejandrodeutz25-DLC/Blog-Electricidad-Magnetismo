@@ -1,3 +1,6 @@
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from .forms import PostForm
@@ -17,6 +20,7 @@ def detalle_post(request, pk):
     return render(request, "posts/detalle_post.html", {"post": post})
 
 
+@login_required
 def crear_post(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
@@ -28,6 +32,7 @@ def crear_post(request):
     return render(request, "posts/form_post.html", {"form": form, "titulo_pagina": "Nuevo post"})
 
 
+@login_required
 def editar_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -40,9 +45,22 @@ def editar_post(request, pk):
     return render(request, "posts/form_post.html", {"form": form, "titulo_pagina": "Editar post"})
 
 
+@login_required
 def eliminar_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         post.delete()
         return redirect("lista_posts")
     return render(request, "posts/eliminar_post.html", {"post": post})
+
+
+def registro(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            login(request, usuario)
+            return redirect("lista_posts")
+    else:
+        form = UserCreationForm()
+    return render(request, "posts/registro.html", {"form": form})
